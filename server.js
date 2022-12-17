@@ -7,8 +7,6 @@ const app = express();
 app.engine('.hbs',hbs({ extname: 'hbs', layoutsDir: './layouts', defaultLayout: 'main' }));
 app.set('view engine', '.hbs');
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
 
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -18,10 +16,10 @@ app.post('/contact/send-message', (req, res) => {
   const { author, sender, title, message } = req.body;
 
   if(author && sender && title && message) {
-    res.send('The message has been sent!');
+    res.render('contact', { isSent: true });
   }
   else {
-    res.send('You can\'t leave fields empty!')
+    res.render('contact', { isError: true });
   }
 
 });
@@ -38,7 +36,7 @@ app.get('/about', (req, res) => {
   res.render('about');
 });
 
-app.post('/contact/send-message', (req, res) => {
+app.post('/contact', (req, res) => {
   res.json(req.body);
 });
 
