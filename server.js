@@ -13,6 +13,18 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.post('/contact/send-message', (req, res) => {
+
+  const { author, sender, title, message } = req.body;
+
+  if(author && sender && title && message) {
+    res.send('The message has been sent!');
+  }
+  else {
+    res.send('You can\'t leave fields empty!')
+  }
+
+});
 
 app.get('/hello/:name', (req, res) => {
   res.render('hello', { name: req.params.name });
