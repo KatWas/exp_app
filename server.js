@@ -33,8 +33,8 @@ app.get('/about', ( req,res ) => {
   res.render('about');
 });
 
-app.get('/contact', (req, res) => {
-  res.render('contact');
+app.post('/contact', (req, res) => {
+  res.json(req.body);
 });
 
 app.get('/info', (req, res) => {
